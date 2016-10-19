@@ -1,0 +1,11 @@
+A0 A1 ---time2 ch1 ch2  ×ó±àÂëÆ÷
+B6 B7 ---time4 ch1 ch2  ÓÒ±àÂëÆ÷
+B12 B13 B14 B15 ---- spi  nss sck miso mosi
+B0 ---time3 ldc1000 clk
+A8 A11 --- time1 ch1 ch4 
+A4 Beep 
+A3 SCL 
+A2 SDA 
+A7 INT 
+C5 KEY1
+A15 KEY2
