@@ -12,5 +12,4 @@ int main(void)
 //		a=RxMessage.Data[0];
 //		
 //	}
-	
 }
