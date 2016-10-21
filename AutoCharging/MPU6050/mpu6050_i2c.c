@@ -1,5 +1,5 @@
-#include "main.h"
-
+//#include "main.h"
+#include "stm32f10x.h"
 /*----I2C1----SCL----PB6---*/
 /*----I2C1----SDA----PB7---*/
 

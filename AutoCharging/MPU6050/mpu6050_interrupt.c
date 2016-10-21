@@ -1,4 +1,5 @@
-#include "main.h"
+//#include "main.h"
+#include "stm32f10x.h"
 u8 mpu_6050_data_ok_flag=0;
 static void NVIC_Configuration(void)
 {

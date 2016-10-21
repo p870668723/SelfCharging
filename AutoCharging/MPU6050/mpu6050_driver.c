@@ -1,5 +1,10 @@
-#include "main.h"
+//#include "main.h"
 #include "stmflash.h"
+#include "mpu6050_i2c.h"
+#include "mpu6050_interrupt.h"
+#include "mpu6050_driver.h"
+#include "mpu6050_process.h"
+#include "app.h"
 //定义MPU6050内部地址
 #define	SMPLRT_DIV		0x19	//陀螺仪采样率 典型值 0X07 125Hz
 #define	CONFIG		  	0x1A	//低通滤波频率 典型值 0x00 
@@ -167,6 +172,6 @@ void MPU6050_Gyro_calibration(void)
 	GYRO_OFFSET.x=(int)x_temp;
 	GYRO_OFFSET.y=(int)y_temp;
 	GYRO_OFFSET.z=(int)z_temp;
-    EE_SAVE_GYRO_OFFSET();
-    Set_Exti(1);
+  EE_SAVE_GYRO_OFFSET();
+  Set_Exti(1);
 }

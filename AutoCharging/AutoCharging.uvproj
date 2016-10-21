@@ -359,9 +359,9 @@
             <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F10X_MD,USE_STDPERIPH_DRIVER</Define>
+              <Define>STM32F10X_MD USE_STDPERIPH_DRIVER MPU6050</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Libraries\CMSIS\CM3\CoreSupport;.\Libraries\CMSIS\CM3;.\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x;.\users;..\舵机驱动;.\app</IncludePath>
+              <IncludePath>.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Libraries\CMSIS\CM3\CoreSupport;.\Libraries\CMSIS\CM3;.\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x;.\users;..\舵机驱动;.\app;.\IMU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -588,6 +588,51 @@
               <FileName>mymath.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\mymath.c</FilePath>
+            </File>
+            <File>
+              <FileName>systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\systick.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\timer.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>IMU</GroupName>
+          <Files>
+            <File>
+              <FileName>imu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IMU\imu.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IMU\inv_mpu.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IMU\inv_mpu_dmp_motion_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>kalman.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IMU\kalman.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IMU\mpu_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\IMU\mpu6050.c</FilePath>
             </File>
           </Files>
         </Group>

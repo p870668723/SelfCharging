@@ -1,4 +1,9 @@
-#include "main.h"
+//#include "main.h"
+#include "stm32f10x.h"
+#include "mpu6050_i2c.h"
+#include "mpu6050_interrupt.h"
+#include "mpu6050_driver.h"
+#include "mpu6050_process.h"
 
 ACCEL_AVERAGE_DATA   Accel_Raw_Average_Data; 
 GYRO_RADIAN_DATA     Gyro_Radian_Data;

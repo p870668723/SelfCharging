@@ -17,6 +17,14 @@ void delay_us(u16 nus)
 		while(i--);
 	}
 } 
+void delay_ms(u16 nms)
+{
+	u16 i=0;
+	for(i=nms;i;i--)
+	{
+		delay_us(1000);
+	}
+} 
 
 
 u16 Get_Adc(u8 ch) 
@@ -171,3 +179,5 @@ void CAN_RoboModule_DRV_PWM_Velocity_Mode(unsigned char Group,unsigned char Numb
     CAN_Transmit(CAN1,&tx_message);
     //while(can_tx_success_flag == 0); //如果CAN芯片是TJA1050，注释掉这个判断。
 }
+
+
