@@ -19,7 +19,7 @@ void BSP_Init(void)
 	CAN1_Configuration();
 	ADC_Configuration();
 	//IIC_Configuration();
-	DMA_Configuration();
+	//DMA_Configuration();
 	//PWM_Configuration();
 }
 
@@ -62,7 +62,14 @@ Outputs      : None
 ********************************************************************************************************/
 void GPIO_Configuration(void)
 {
+	GPIO_InitTypeDef gpio;
+	gpio.GPIO_Mode=GPIO_Mode_Out_PP;
+	gpio.GPIO_Pin=GPIO_Pin_6 | GPIO_Pin_7;
+	gpio.GPIO_Speed=GPIO_Speed_50MHz;
 	
+	GPIO_Init(GPIOA,&gpio);
+	
+	GPIO_SetBits(GPIOA,GPIO_Pin_7|GPIO_Pin_6);//初始时，都关闭
 }
 
 
@@ -171,6 +178,44 @@ void IIC_Configuration(void)
 { 
 
 }
+
+
+
+
+/********************************************************************************************************
+Function Name: USART_Configuration
+Author       : pf
+Date         : 2016.7.12
+Description  : 
+Inputs       : None
+Outputs      : None 
+********************************************************************************************************/
+void USART1_Configuration(void)
+{
+	USART_InitTypeDef USART_InitStructure;
+	GPIO_InitTypeDef GPIO_InitStructure;
+	
+	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_10;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 ;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);  
+	
+	USART_DeInit(USART1);
+	USART_InitStructure.USART_BaudRate = 115200;
+  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+  USART_InitStructure.USART_StopBits = USART_StopBits_1;
+  USART_InitStructure.USART_Parity = USART_Parity_No;
+  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(USART1, &USART_InitStructure);
+	
+	USART_Cmd(USART1, ENABLE);
+	
+}
+
 
 /********************************************************************************************************
 Function Name: RCC_Configuration
@@ -349,9 +394,16 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 		CAN_ClearITPendingBit(CAN1, CAN_IT_FMP0);
 		CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
 	}
-	if(RxMessage.StdId==0x00)
+	if(RxMessage.StdId==0x00)//主控板的CAN ID
 	{
 		for(i=0;i<8;i++)
 		{data[i]=RxMessage.Data[i];}
+		if(data[0]==1) ChargeFlag=1;//控制板发来充电信号，讲充电标志位置位，主程序开始充电程序。
+	}
+	else if(RxMessage.StdId==0x01)//电源管理的CAN ID
+	{
+		for(i=0;i<8;i++)
+		{data[i]=RxMessage.Data[i];}
+		if(data[0]==1) ChargeFlag=0;//电源管理板发来电量饱和信号，将充电标志清除，结束充电
 	}
 }

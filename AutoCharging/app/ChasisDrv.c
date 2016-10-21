@@ -1,6 +1,7 @@
 #include "stm32f10x.h"
 #include "ChasisDrv.h"
 #include "mymath.h"
+#include "app.h"
 
 //坐标系定义 判断跟ROS坐标系定义是否吻合 吻合为1 不吻合为-1
 #define  FORWARD_POSITIVE_FACTOR			(1)
@@ -47,7 +48,7 @@ void Robot_MoveOmni(double vx,double vy,double vtheta)
   spd[2] =  sin(PI/3)*vx - cos(PI/3)*vy + WheelD*vtheta;
 	
 	MotorMileToRevolution(spd);
-	//MotorSetRunVelocity(spd[0],spd[1],spd[2]);
+	MotorSetRunVelocity(spd[0],spd[1],spd[2]);
 	//Motor_setRun(spd[0],spd[1],spd[2]);
 }
 
