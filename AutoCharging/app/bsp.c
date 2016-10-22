@@ -18,6 +18,7 @@ void BSP_Init(void)
 	NVIC_Configuration();
 	CAN1_Configuration();
 	ADC_Configuration();
+  USART1_Configuration();
 	//IIC_Configuration();
 	//DMA_Configuration();
 	//PWM_Configuration();
@@ -121,7 +122,7 @@ void CAN1_Configuration(void)
    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
    GPIO_Init(GPIOA, &GPIO_InitStructure);
    
-   GPIO_PinRemapConfig(GPIO_Remap1_CAN1 , ENABLE);
+//   GPIO_PinRemapConfig(GPIO_Remap1_CAN1 , ENABLE);
    
    /* CAN register init */
    CAN_DeInit(CAN1);
@@ -139,8 +140,8 @@ void CAN1_Configuration(void)
    /* CAN Baudrate = 1MBps*/
    CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
    CAN_InitStructure.CAN_BS1 = CAN_BS1_3tq;
-   CAN_InitStructure.CAN_BS2 = CAN_BS2_5tq;
-   CAN_InitStructure.CAN_Prescaler = 4;
+   CAN_InitStructure.CAN_BS2 = CAN_BS2_2tq;
+   CAN_InitStructure.CAN_Prescaler = 6;
    CAN_Init(CAN1, &CAN_InitStructure);
  
 
@@ -151,7 +152,7 @@ void CAN1_Configuration(void)
    CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
    CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0x0000;
    CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
-   CAN_FilterInitStructure.CAN_FilterFIFOAssignment = 0;
+   CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_FilterFIFO0;
    CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
    CAN_FilterInit(&CAN_FilterInitStructure);
    

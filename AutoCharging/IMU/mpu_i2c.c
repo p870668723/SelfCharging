@@ -1,14 +1,14 @@
 #include "mpu_i2c.h"
 
 
-#define SCL_H         GPIO_SetBits(GPIOB , GPIO_Pin_10)   
-#define SCL_L         GPIO_ResetBits(GPIOB , GPIO_Pin_10) 
+#define SCL_H         GPIO_SetBits(GPIOA , GPIO_Pin_4)   
+#define SCL_L         GPIO_ResetBits(GPIOA , GPIO_Pin_4) 
 
-#define SDA_H         GPIO_SetBits(GPIOB , GPIO_Pin_11)   
-#define SDA_L         GPIO_ResetBits(GPIOB , GPIO_Pin_11) 
+#define SDA_H         GPIO_SetBits(GPIOA , GPIO_Pin_5)   
+#define SDA_L         GPIO_ResetBits(GPIOA , GPIO_Pin_5) 
 
-#define SCL_read      GPIO_ReadInputDataBit(GPIOB , GPIO_Pin_10) 
-#define SDA_read      GPIO_ReadInputDataBit(GPIOB , GPIO_Pin_11)
+#define SCL_read      GPIO_ReadInputDataBit(GPIOA , GPIO_Pin_4) 
+#define SDA_read      GPIO_ReadInputDataBit(GPIOA , GPIO_Pin_5)
 
 static void I2C_Delay(void)
 {

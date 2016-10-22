@@ -2,7 +2,7 @@
 #define APP_H_
 
 #include "stm32f10x.h"
-
+#include "stdio.h"
 
 extern s32 uOffset_AD0,uOffset_AD1,uOffset_AD2,uOffset_AD3;
 extern s32 ureal_irda_data0,ureal_irda_data1,ureal_irda_data2,ureal_irda_data3;

@@ -1,7 +1,7 @@
 #include "systick.h"
 
 
-#define SYS_FREQ    168000000
+#define SYS_FREQ    72000000
 
 void Systick_Init()
 {
