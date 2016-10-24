@@ -3,7 +3,7 @@
 #include "app.h"
 #include "mymath.h"
 
-s32 uOffset_AD0,uOffset_AD1,uOffset_AD2,uOffset_AD3;
+s32 uOffset_AD0=0,uOffset_AD1=0,uOffset_AD2=0,uOffset_AD3=0;
 s32 ureal_irda_data0,ureal_irda_data1,ureal_irda_data2,ureal_irda_data3;
 s32 sreal_irda_Position;
 int ChargeFlag=0;//充电标志。为1时表示开始充电。
@@ -30,7 +30,7 @@ void delay_ms(u16 nms)
 u16 Get_Adc(u8 ch) 
 {
   	//设置指定ADC的规则组通道，一个序列，采样时间
-	ADC_RegularChannelConfig(ADC1, ch, 1, ADC_SampleTime_239Cycles5 );	//ADC1,ADC通道,采样时间为239.5周期	  			    
+	ADC_RegularChannelConfig(ADC1, ch, 1, ADC_SampleTime_55Cycles5 );	//ADC1,ADC通道,采样时间为239.5周期	  			    
   
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);		//使能指定的ADC1的软件转换启动功能	
 	 
@@ -46,7 +46,7 @@ u16 Get_Adc_Average(u8 ch,u8 times)
 	for(t=0;t<times;t++)
 	{
 		temp_val+=Get_Adc(ch);
-		delay_us(5000);
+		delay_us(2000);
 	}
 	return temp_val/times;
 } 	 
@@ -54,8 +54,8 @@ u16 Get_Adc_Average(u8 ch,u8 times)
 /*当无红外照射时，获取传感器的零点偏差，即零位校准*/
 void offset_ad(void)
 {
-	u32 i;
-		for(i=0; i<1000; i++)
+	int i;
+		for(i=0; i<10; i++)
 	{
 	  uOffset_AD0+=Get_Adc_Average(ADC_Channel_0,10);
 	  uOffset_AD1+=Get_Adc_Average(ADC_Channel_1,10);
@@ -63,10 +63,10 @@ void offset_ad(void)
 	  uOffset_AD3+=Get_Adc_Average(ADC_Channel_3,10);
 	  delay_us(500);
 	}
-	uOffset_AD0/=1000;
-	uOffset_AD1/=1000;
-	uOffset_AD2/=1000;
-	uOffset_AD3/=1000;
+	uOffset_AD0/=10;
+	uOffset_AD1/=10;
+	uOffset_AD2/=10;
+	uOffset_AD3/=10;
 }
 
 

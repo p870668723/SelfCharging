@@ -20,9 +20,10 @@ int main(void)
 	u8 data[8]={2,2,3,3,4,4,5,5};  //for test...
 	BSP_Init();
 	Timer_Init();  																 		 //定时器 OK
-//	MPU6050_Init();                                    //MPU6050初始
-//	systick_ms(1000);
+	MPU6050_Init();                                    //MPU6050初始
+	systick_ms(500);
 
+	offset_ad();
 	/*测试*/
 	while(1)
 	{
@@ -41,8 +42,15 @@ int main(void)
 			systick_ms(600);
 		}
 		
-		Can_Sent(data);
-		printf("Usart Testing... \n");
+//		Can_Sent(data);
+//		printf("Usart Testing... \n");
+		
+		get_irda_data();
+		printf("data0:%d\n",ureal_irda_data0);
+		printf("data1:%d\n",ureal_irda_data1);
+		printf("data2:%d\n",ureal_irda_data2);
+		printf("data3:%d\n",ureal_irda_data3);
+		
 	}
 	
 	/*轮询控制*/

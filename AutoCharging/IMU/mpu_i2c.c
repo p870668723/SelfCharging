@@ -138,7 +138,7 @@ void IIC_Init(void)
 //    gpio.GPIO_Mode =GPIO_Mode_AF_OD;
 	  gpio.GPIO_Mode =GPIO_Mode_Out_OD;
 	  
-    GPIO_Init(GPIOD, &gpio);
+    GPIO_Init(GPIOA, &gpio);
 }
 
 bool i2cWriteBuffer(uint8_t addr, uint8_t reg, uint8_t len, uint8_t * data)
