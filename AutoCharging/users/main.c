@@ -5,6 +5,7 @@
 #include "timer.h"
 #include "mpu6050.h"
 #include "ChasisDrv.h"
+#include <stdio.h>
 
 int fputc(int ch, FILE *f)
 {
@@ -16,26 +17,32 @@ int fputc(int ch, FILE *f)
 
 int main(void)
 {
-	u8 data[8]={1,2,3,4,5,6,7,8};  //for test...
+	u8 data[8]={2,2,3,3,4,4,5,5};  //for test...
 	BSP_Init();
 	Timer_Init();  																 		 //¶¨Ê±Æ÷ OK
 //	MPU6050_Init();                                    //MPU6050³õÊ¼
-	systick_ms(1000);
+//	systick_ms(1000);
 
-//	if(RxMessage.StdId==0x100)
-//	{
-//		a=RxMessage.Data[0];
-//		
-//	}
-	
 	/*²âÊÔ*/
 	while(1)
 	{
-		GPIO_SetBits(GPIOA,GPIO_Pin_6 | GPIO_Pin_7);
-		systick_ms(1000);
-	  GPIO_ResetBits(GPIOA,GPIO_Pin_6 | GPIO_Pin_7);
-		systick_ms(1000);
+		if(ChargeFlag==1)
+		{
+			GPIO_SetBits(GPIOA,GPIO_Pin_6 | GPIO_Pin_7);
+			systick_ms(200);
+			GPIO_ResetBits(GPIOA,GPIO_Pin_6 | GPIO_Pin_7);
+			systick_ms(200);
+		}
+		else
+		{
+			GPIO_SetBits(GPIOA,GPIO_Pin_6 | GPIO_Pin_7);
+			systick_ms(600);
+			GPIO_ResetBits(GPIOA,GPIO_Pin_6 | GPIO_Pin_7);
+			systick_ms(600);
+		}
+		
 		Can_Sent(data);
+		printf("Usart Testing... \n");
 	}
 	
 	/*ÂÖÑ¯¿ØÖÆ*/

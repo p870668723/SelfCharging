@@ -443,7 +443,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>70</TopLine>
+      <TopLine>1</TopLine>
       <CurrentLine>1</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\Libraries\stm32f10x_flash.c</PathWithFileName>
@@ -595,7 +595,7 @@
       <Focus>0</Focus>
       <ColumnNumber>20</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>2</TopLine>
+      <TopLine>15</TopLine>
       <CurrentLine>26</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\Mylib\ad.c</PathWithFileName>
@@ -793,10 +793,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>11</ColumnNumber>
+      <ColumnNumber>22</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>1</TopLine>
-      <CurrentLine>1</CurrentLine>
+      <CurrentLine>19</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\main.c</PathWithFileName>
       <FilenameWithoutPath>main.c</FilenameWithoutPath>
@@ -827,7 +827,7 @@
       <Focus>0</Focus>
       <ColumnNumber>15</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
+      <TopLine>68</TopLine>
       <CurrentLine>92</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\app.c</PathWithFileName>
@@ -851,7 +851,7 @@
       <Focus>0</Focus>
       <ColumnNumber>10</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>149</TopLine>
+      <TopLine>146</TopLine>
       <CurrentLine>170</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\MPU6050\mpu6050_driver.c</PathWithFileName>
@@ -899,7 +899,7 @@
       <Focus>0</Focus>
       <ColumnNumber>21</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>37</TopLine>
+      <TopLine>38</TopLine>
       <CurrentLine>44</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\MPU6050\mpu6050_process.c</PathWithFileName>

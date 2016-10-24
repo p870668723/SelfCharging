@@ -39,14 +39,16 @@ void RCC_Configuration(void)
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
 	
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1 , ENABLE);
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2 , ENABLE);
+	
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1 , ENABLE);
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2 , ENABLE);
 
 }
 
@@ -87,13 +89,13 @@ Outputs      : None
 void NVIC_Configuration(void)
 {
 	NVIC_InitTypeDef  NVIC_InitStructure;
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 	
-	NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0;
+	NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	
+	NVIC_Init(&NVIC_InitStructure);
 }
 
 
@@ -156,7 +158,7 @@ void CAN1_Configuration(void)
    CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
    CAN_FilterInit(&CAN_FilterInitStructure);
    
-	 CAN_ITConfig(CAN2,CAN_IT_FMP0,ENABLE);
+	 CAN_ITConfig(CAN1,CAN_IT_FMP0,ENABLE);
    /* Transmit */
 	 
 //   TxMessage.StdId = 0x321;
@@ -199,7 +201,7 @@ void USART1_Configuration(void)
 	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_10;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(GPIOB, &GPIO_InitStructure);
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 ;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(GPIOA, &GPIO_InitStructure);  
@@ -395,16 +397,15 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 		CAN_ClearITPendingBit(CAN1, CAN_IT_FMP0);
 		CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
 	}
-	if(RxMessage.StdId==0x00)//主控板的CAN ID
-	{
+	
 		for(i=0;i<8;i++)
 		{data[i]=RxMessage.Data[i];}
 		if(data[0]==1) ChargeFlag=1;//控制板发来充电信号，讲充电标志位置位，主程序开始充电程序。
-	}
-	else if(RxMessage.StdId==0x01)//电源管理的CAN ID
-	{
-		for(i=0;i<8;i++)
-		{data[i]=RxMessage.Data[i];}
-		if(data[0]==1) ChargeFlag=0;//电源管理板发来电量饱和信号，将充电标志清除，结束充电
-	}
+		
+//	else if(RxMessage.StdId==0x01)//电源管理的CAN ID
+//	{
+//		for(i=0;i<8;i++)
+//		{data[i]=RxMessage.Data[i];}
+//		if(data[0]==1) ChargeFlag=0;//电源管理板发来电量饱和信号，将充电标志清除，结束充电
+//	}
 }
